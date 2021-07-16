@@ -1,0 +1,19 @@
+version: '2.0'
+services:
+    nginx:
+        image: nginx:1.11.12
+        container_name: nginx
+        volumes:
+           - /data/app/www.example.com:/data/app/www.example.com
+           - /data/logs:/data/logs
+           - /data/app/nginx_config:/etc/nginx/conf.d
+        ports:
+           - "80:80"
+    php-fpm:
+        image: cmcm/php-fpm:5.4.45
+        container_name: fpm
+        volumes:
+           - /data/app/www.example.com:/data/app/www.example.com
+           - /data/app/php_config/php.ini:/usr/local/etc/php/php.ini
+        ports:
+           - "9000:9000"
